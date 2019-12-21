@@ -24,6 +24,6 @@ then
     exit 1
 fi
 
-cd "$PLEX_LIBRARY_DIR"
+cd "$PLEX_LIBRARY_DIR" || exit
 
-sudo -u plex tar --exclude="Cache/*" --exclude="Crash Reports/*" -cvf "$BACKUP_FILE" *
+sudo -u plex tar --exclude="Cache/*" --exclude="Crash Reports/*" -cvf "$BACKUP_FILE" ./*
