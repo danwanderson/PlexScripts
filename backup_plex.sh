@@ -8,7 +8,7 @@ LOCK_FILE="/mnt/Plex/backup/backup_plex_lock"
 function finish {
     rm -f "$LOCK_FILE"
 }
-trap finish EXIT
+trap finish EXIT SIGINT SIGTERM
 
 if [ -f "$LOCK_FILE" ];
 then
