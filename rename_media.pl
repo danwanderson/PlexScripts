@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Rename media ot the format SxxExx
+# Rename media to the format SxxExx
 # In the early days, I did a lot of SxEx. Trying to standardize
 
 use warnings;
