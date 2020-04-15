@@ -1,4 +1,4 @@
-#!/usr/bin/env perl6
+#!/usr/bin/env perl
 
 # Parse the copy-paste output from thetvdb.com and turn it into something Plex-friendly
 
