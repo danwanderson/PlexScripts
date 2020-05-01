@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PLEX_LIBRARY_DIR="/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
-NOW=$(date +%m-%d-%Y_%H-%M-%S)
+NOW=$(date +%Y-%m-%d_%H-%M-%S)
 BACKUP_FILE="/mnt/Plex/backup/plex_backup_${NOW}.tar"
 LOCK_FILE="/mnt/Plex/backup/backup_plex_lock"
 
