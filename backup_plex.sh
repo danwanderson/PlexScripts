@@ -4,6 +4,7 @@ PLEX_LIBRARY_DIR="${HOME}/plex/config"
 NOW=$(date +%Y-%m-%d_%H-%M-%S)
 BACKUP_FILE="${HOME}/plex_backup_${NOW}.tar"
 LOCK_FILE="${HOME}/backup_plex_lock"
+BACKUP_DIR="/mnt/Plex/backup"
 
 function finish {
     rm -f "$LOCK_FILE"
@@ -28,4 +29,6 @@ cd "$PLEX_LIBRARY_DIR" || exit
 
 tar --exclude="Cache/*" --exclude="Crash Reports/*" -cvf "$BACKUP_FILE" ./*
 
-mv "$BACKUP_FILE" /mnt/Plex/backup
+mv "$BACKUP_FILE" "$BACKUP_DIR"
+
+ln -sf "${BACKUP_DIR}/${BACKUP_FILE}" "${BACKUP_DIR}/plex_backup_latest.tar"
