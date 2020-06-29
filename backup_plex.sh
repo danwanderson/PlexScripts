@@ -31,4 +31,6 @@ tar --exclude="Cache/*" --exclude="Crash Reports/*" -cvf "$BACKUP_FILE" ./*
 
 mv "$BACKUP_FILE" "$BACKUP_DIR"
 
-ln -sf "${BACKUP_DIR}/${BACKUP_FILE}" "${BACKUP_DIR}/plex_backup_latest.tar"
+BACKUP_FILENAME=$(basename "${BACKUP_FILE}")
+
+ln -sf "${BACKUP_DIR}/${BACKUP_FILENAME}" "${BACKUP_DIR}/plex_backup_latest.tar"
