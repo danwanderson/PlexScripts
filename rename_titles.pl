@@ -24,9 +24,19 @@ my $output="";
 open(my $fh, "<", $INPUTFILE) or die "Can't open < $INPUTFILE: $!";
 
 while (my $line = <$fh>) {
-    $line =~ m/(S\d+E\d+)\s+(.*)\s+(January|February|March|April|May|June|July|August|September|October|November|December|\s+\d+).*/;
-    my $episode = $1;
-    my $episode_title = $2;
+    my $episode = "";
+    my $episode_title = "";
+
+    if ($line =~ m/(S\d+E\d+)\s+(.*)\s+(January|February|March|April|May|June|July|August|September|October|November|December|\s+\d+).*/) {
+        $episode = $1;
+        $episode_title = $2;
+    } elsif ($line =~ m/(S\d+E\d+)\s(.*)/) {
+        $episode = $1;
+        $episode_title = $2;
+    } else {
+        next;
+    }
+
     $episode_title =~ s/(#|“|”|"|\?|\!)//g;
     $episode_title =~ s/:/ -/g;
     $output = $output . "$TITLE - $episode - $episode_title\n";

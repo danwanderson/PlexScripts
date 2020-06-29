@@ -45,4 +45,24 @@ while (my $filename = readdir(DIR)) {
             move("$filename","$newfilename");
         }
     }
+    # Deal with items that don't have an episode name after the episode number
+    # Copying way too much code but I'm too lazy at the moment to fix it
+    if ($filename =~ m/\sS(\d+)E(\d+)\.m/) {
+        my $season = $1;
+        my $episode = $2;
+
+        if ($season =~ /^[1-9]$/) {
+            $season = '0' . $season;
+        }
+
+        if ($episode =~ /^[1-9]$/) {
+            $episode = '0' . $episode;
+        }
+        my $identifier = " S" . $season . "E" . $episode;
+        $newfilename =~ s/\sS(\d+)E(\d+)/$identifier/;
+        if ($filename !~ $newfilename) {
+            print "Updating $filename to $newfilename\n";
+            move("$filename","$newfilename");
+        }
+    }
 }
