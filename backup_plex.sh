@@ -61,7 +61,7 @@ then
     BACKUP_FILE="${BACKUP_FILE}.gz"
 fi
 
-mv "${BACKUP_FILE}" "${BACKUP_DIR}"
+/bin/mv -v "${BACKUP_FILE}" "${BACKUP_DIR}"
 
 BACKUP_FILENAME=$(basename "${BACKUP_FILE}")
 
