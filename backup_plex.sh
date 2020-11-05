@@ -55,7 +55,7 @@ cd "${PLEX_LIBRARY_DIR}" || exit
 
 tar --exclude="Cache/*" --exclude="Crash Reports/*" -cvf "${BACKUP_FILE}" ./*
 
-if ! [ -z "${COMPRESS}" ];
+if [ -n "${COMPRESS}" ];
 then
     gzip "${BACKUP_FILE}"
     BACKUP_FILE="${BACKUP_FILE}.gz"
