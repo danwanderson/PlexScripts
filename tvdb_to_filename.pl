@@ -39,6 +39,8 @@ while (my $line = <$fh>) {
 
     $episode_title =~ s/(#|“|”|"|\?|\!)//g;
     $episode_title =~ s/:/ -/g;
+    $episode_title =~ s/\&/and/g;
+    $episode_title =~ s/\//-/g;
     $output = $output . "$TITLE - $episode - $episode_title\n";
 }
 
