@@ -12,6 +12,12 @@ function finish {
 }
 trap finish EXIT SIGINT SIGTERM
 
+if ! [ -x $(whence par2) ];
+then
+    echo "Please install par2 (apt install par2)"
+    exit 3
+fi
+
 if [ -f "$LOCK_FILE" ];
 then
     echo "Lock file exists. Is there another job running?"
