@@ -5,14 +5,16 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Variables
+PLEX_DIR="${HOME}/plex"
 PLEX_LIBRARY_DIR="${HOME}/plex/config"
 NOW=$(date +%Y-%m-%d_%H-%M-%S)
-BACKUP_FILE="${HOME}/plex_backup_${NOW}.tar"
+BACKUP_FILE="/mnt/Plex/tmp/plex_backup_${NOW}.tar"
 LOCK_FILE="${HOME}/backup_plex_lock"
 # NFS mount
 BACKUP_DIR="/mnt/Plex/backup"
 REMOVE_OLD="180"
 COMPRESS=""
+STOP=0
 
 function finish {
     rm -f "${LOCK_FILE}"
@@ -31,6 +33,12 @@ if [ ! -d "${PLEX_LIBRARY_DIR}" ];
 then
     echo "Plex library directory not found"
     exit 1
+fi
+
+if [ "${STOP}" -eq 1 ];
+then
+    cd "${PLEX_DIR}"
+    docker-compose down
 fi
 
 # Try to mount the NFS directory if it doesn't exist
@@ -53,7 +61,14 @@ fi
 
 cd "${PLEX_LIBRARY_DIR}" || exit
 
-tar --exclude="Cache/*" --exclude="Crash Reports/*" -cvf "${BACKUP_FILE}" ./*
+tar --exclude="Cache/*" --exclude="Crash Reports/*" --exclude="Library/Application Support/Plex Media Server/Codecs/*" -cvf "${BACKUP_FILE}" ./*
+
+if [ "${STOP}" -eq 1 ];
+then
+    cd "${PLEX_DIR}"
+    docker-compose up --detach
+fi
+
 
 if [ -n "${COMPRESS}" ];
 then
@@ -66,3 +81,4 @@ fi
 BACKUP_FILENAME=$(basename "${BACKUP_FILE}")
 
 ln -sf "${BACKUP_DIR}/${BACKUP_FILENAME}" "${BACKUP_DIR}/plex_backup_latest.tar"
+
