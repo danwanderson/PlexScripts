@@ -44,7 +44,7 @@ do
             set -x
             shift
             ;;
-        -*|--*=) # unsupported flags
+        --*=|-*) # unsupported flags
             echo "Error: unsupported flag $1" >&2
             exit 2
             ;;
