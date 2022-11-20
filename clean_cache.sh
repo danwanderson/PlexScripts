@@ -4,8 +4,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-
 DRYRUN=1
+PARAMS=""
 
 function cleanup() {
     exit
