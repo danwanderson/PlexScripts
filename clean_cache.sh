@@ -14,7 +14,7 @@ cd "${CACHEDIR}" || exit
 # Find files older than 7 days
 if [[ ${DRYRUN} -eq 1 ]];
 then
-    find "${CACHEDIR}/PhotoTranscoder" -mtime +7 -depth -print
+    find "${CACHEDIR}/PhotoTranscoder" -depth -mtime +7 -print
 else
-    find "${CACHEDIR}/PhotoTranscoder" -mtime +7 -depth -delete
+    find "${CACHEDIR}/PhotoTranscoder" -depth -mtime +7 -delete
 fi
