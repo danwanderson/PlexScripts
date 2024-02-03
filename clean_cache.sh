@@ -14,8 +14,8 @@ function cleanup() {
 function usage() {
     echo "Usage $0 [OPTIONS]"
     echo ""
-    echo "-d|--dryrun           Don't print built output"
-    echo "-n|--nodryrun           Don't print built output"
+    echo "-d|--dryrun           Don't make changes (default)"
+    echo "-n|--nodryrun         Remove files"
     echo "-h|--help             Print this message and exit"
 }
 
